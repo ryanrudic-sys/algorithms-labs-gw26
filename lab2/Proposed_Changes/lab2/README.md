@@ -133,9 +133,21 @@ comparing only their numeric values.
 and Insertion Sort each take O(n) time. What happens to Bubble Sort's best-case
 time if you remove its early-exit check?
 
+During Bubble Sort, it compares every adjacent pair. So, if the array is already
+sorted, no swaps are made. With Insertion Sort, when each element is inserted, none
+of the previous elements are bigger, so, no swaps need to be made. This results in
+O(n) time for both sort methods just from passing through the array to make the 
+comparisons. If the early-exit check is removed, it would continue all of the passes
+through the array even if it is already sorted, resulting in O(n^2) time. 
+
 **TODO 1.3B:** Why do the strict `>` comparisons preserve stability? If Bubble
 Sort uses `>=` instead, does it still sort correctly? Is it still stable? Use
 `[5A, 5B]` to explain.
+
+It would still sort correctly, because technically the values ARE the same, but 
+that is what causes it to be unstable, because the original order is not preserved. 
+5A is not greater than 5B, but it is equal, so a swap would be made if you are using
+'>=' instead of '>'. 
 
 ## Part 2: Lomuto Partition and Quicksort
 
@@ -181,7 +193,7 @@ A swap with the same index is allowed and leaves the array unchanged.
 |---|---|---|---|---|---|
 | Initial | N/A | N/A | None | -1 | `[2, 8, 7, 1, 3, 5, 6, 4]` |
 | 0 | 2 | Yes | 0 and 0 | 0 | `[2, 8, 7, 1, 3, 5, 6, 4]` |
-| 1 | TODO | TODO | TODO | TODO | TODO |
+| 1 | 8 | No | None | TODO | `[2, 8, 7, 1, 3, 5, 6, 4]` |
 | 2 | TODO | TODO | TODO | TODO | TODO |
 | 3 | TODO | TODO | TODO | TODO | TODO |
 | 4 | TODO | TODO | TODO | TODO | TODO |
