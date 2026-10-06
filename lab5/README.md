@@ -98,15 +98,22 @@ have a different height, creating imbalances higher up.
 
 **TODO 1.1:** Briefly recall the three deletion cases from Lab 3/4:
 - What happens when the target node has 0 children?
+The node is the leaf, so you can just remove it. 
 - What happens when the target node has 1 child?
+If the node has 1 child, that node is replaced by its child. The child's parent pointer is updated to the deleted 
+node's parent. 
 - What happens when the target node has 2 children, and why is the in-order successor used?
+Find the minimum node in the deleted node's right subtree. Replace the deleted node with the in-order successor. 
 
 ### 1.2 Short answer: Height change after deletion
 
 **TODO 1.2:** When you delete a leaf node from an AVL tree:
 - Does the leaf's parent's height change? By how much?
+Yes, the height might decrease when you delete a leaf. By 1. 
 - Can the grandparent's height change?
+Yes, it can change. 
 - Can the imbalance propagate to the root?
+Yes. You have to continue checking every ancestor instead of stopping after the first rotation. 
 
 ---
 
@@ -130,6 +137,9 @@ All nodes are balanced: 20 has BF=0, 10 has BF=0, 30 has BF=0.
 **TODO 2.1:** Delete key `10` from the tree above. Trace the rebalancing:
 
 1. Perform BST deletion of 10 (it's a leaf). What is the tree after deletion?
+20
+  \
+   30
 2. Rebalance from the parent of the deleted node (20).
 3. What is the balance factor at 20?
 4. Identify the violation signature (LL, RR, LR, or RL) and the required rotation.
