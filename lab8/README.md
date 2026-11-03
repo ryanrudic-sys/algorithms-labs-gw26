@@ -123,11 +123,13 @@ newly assigned parents.
 | Vertex removed | Queue afterward | New parent assignments |
 |---|---|---|
 | 0 | `[1, 2]` | `parent[1] = 0`, `parent[2] = 0` |
-| 1 | TODO | TODO |
-| 2 | TODO | TODO |
-| 3 | TODO | TODO |
+| 1 | `[2, 3, 4]` | `parent[3] = 1, parent[4] = 1` |
+| 2 | `[3, 4]` | none |
+| 3 | `[4]` | none |
 
 Why does processing `2` leave `parent[4]` unchanged? Answer in one sentence.
+Processing vertex 2 leaves parent[4] unchanged because vertext 4 was already
+visited and assigned parent 1. 
 
 ### 2.2 Implementation
 
@@ -225,9 +227,9 @@ vertex `5`.
 | Vertex | Parent | Discovery time | Finishing time |
 |---|---|---|---|
 | 0 | `None` | 1 | 10 |
-| 3 | TODO | TODO | TODO |
-| 4 | TODO | TODO | TODO |
-| 5 | TODO | TODO | TODO |
+| 3 | 1 | 3 | 8 |
+| 4 | 3 | 4 | 7 |
+| 5 | `None` | 11 | 12 |
 
 ### 3.2 Implementation
 
@@ -248,12 +250,16 @@ a vertex's neighbors requires scanning its entire row.
 
 | Cost | Adjacency list | Adjacency matrix |
 |---|---|---|
-| Store the graph | TODO | TODO |
-| Run BFS | TODO | TODO |
-| Run DFS | TODO | TODO |
+| Store the graph | O(V + E) | O(V^2) |
+| Run BFS | O(V + E) | O(V^2) |
+| Run DFS | O(V + E) | O(V^2) |
 
 In a few sentences, explain how many neighbor entries each traversal checks
 with each representation. Why does a sparse graph benefit from adjacency lists?
+With an adjacency list, BFS and DFS check each vertex and its neighbors. 
+With an adjacency matrix, both algorithms check V entries for each of the V
+vertices, totaling to V^2 entries. Sparse graphs benefit from adjaceny 
+lists because they use less memory and avoid checking nonexistent edges. 
 
 ---
 
