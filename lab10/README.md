@@ -117,14 +117,15 @@ using its two endpoint labels.
 
 | Vertex removed | Edge added | `key[D]` | `key[E]` |
 |---|---|---|---|
-| `B` | TODO | TODO | TODO |
-| `C` | TODO | TODO | TODO |
-| `D` | TODO | TODO | TODO |
+| `B` | `A-B` | 4 | infinity |
+| `C` | `B-C` | 4 | 6 |
+| `D` | `B-D` | 4 | 6 |
 
 1. Which vertex becomes `C`'s parent, and what causes the change? 
-
+B because the edge B-C has a smaller weight than A-C.
 
 2. After removing `E`, what are the tree's four edges and total weight? 
+A-B, B-C, B-D, and C-E. The total weight is 13.
 
 
 
@@ -199,12 +200,14 @@ after each check, including checks that leave them unchanged.
 
 | Edge checked | Candidate | Distance of `v` | Parent of `v` |
 |---|---|---|---|
-| `B -> C` | TODO | TODO | TODO |
-| `C -> D` | TODO | TODO | TODO |
-| `C -> E` | TODO | TODO | TODO |
-| `D -> E` | TODO | TODO | TODO |
+| `B -> C` | 2 + 1 = 3 | 3 | A |
+| `C -> D` | 3 + 5 = 8 | 6 | B |
+| `C -> E` | 3 + 6 = 9 | 9 | C |
+| `D -> E` | 6 + 7 = 9 | 9 | C |
 
 Give the final distance array and the shortest path from `A` to `E`:
+[0, 2, 3, 6, 9]
+The shortest path from A to E is A -> C -> E.
 
  **TODO**
 
@@ -222,13 +225,15 @@ undirected graphs, including graphs with unreachable vertices.
 1. Change only the weight of `A--C` to `2.5`. Starting from `A`, what is
    `C`'s parent under each algorithm? What quantity does each algorithm
    minimize? 
-
+  
+Prim's chooses B as C's parent because B-C has the smallest edge weight. Dijkstra's chooses A because the direct path to C is shorter than going through B. Prim's minimizes the total weight of the tree and Dijkstra's minimizes the distance from the starting vertex.
 
 2. Consider the directed edges `S -> A: 2`, `S -> B: 5`, and `B -> A: -4`.
    Starting from `S`, which distance does Dijkstra finalize too early?
    Give the actual shortest distance and explain why the negative edge
    causes a problem.
 
+Dijkstra's finalizes A's distance too early at 2. The actual shortest distance is 1 through S -> B -> A. Dijkstra's does not work correctly with negative edges because a shorter path can be found after a vertex has already been finalized.
 
 3. Let `V` and `E` be the numbers of vertices and edges. For the provided
    heap, building the queue takes `O(V)`, each removal or decrease takes
@@ -237,7 +242,8 @@ undirected graphs, including graphs with unreachable vertices.
    auxiliary space bounds. Exclude the input graph from space. What is
    the time bound if finding the minimum instead scans an unsorted array
    of vertices?
-
+   
+Both algorithms have the same complexity. Time complexity is O((V + E) log V) because each vertex is removed from the heap once and each edge may cause a priority update. Auxiliary space is O(V) because the arrays and priority queue store information for each vertex. With an unsorted array, the time bound is O(V²) for a simple graph, because finding the minimum requires searching the entire array each time.
 
 ---
 
